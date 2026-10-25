@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رحلة قادة التفسير - الصف الأول المتوسط | مدارس الرياض</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #046A38;
+            --primary-dark: #024724;
+            --secondary: #002B49;
+            --accent: #D4AF37;
+            --bg-light: #F4F7F5;
+            --white: #FFFFFF;
+            --success: #28a745;
+            --danger: #dc3545;
+            --gray: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .school-logo {
+            background: var(--white);
+            padding: 6px 12px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .school-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .school-sub {
+            font-size: 0.75rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .slogan-badge {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: rgba(255,255,255,0.15);
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-nav:hover, .btn-nav.active {
+            background: var(--accent);
+            color: var(--secondary);
+            border-color: var(--accent);
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+            width: 100%;
+            flex: 1;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        #login-screen {
+            text-align: center;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        #login-screen h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .input-group {
+            margin: 25px 0;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(4, 106, 56, 0.3);
+        }
+
+        .player-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eef6f2;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border-right: 5px solid var(--primary);
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: var(--white);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .question-counter {
+            color: var(--gray);
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: var(--bg-light);
+            border: 2px solid #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-align: right;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #eef6f2;
+        }
+
+        .option-btn.correct {
+            background: #d4edda !important;
+            border-color: var(--success) !important;
+            color: #155724 !important;
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da !important;
+            border-color: var(--danger) !important;
+            color: #721c24 !important;
+        }
+
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-right: 4px solid #ffc107;
+            border-radius: 6px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .btn-next {
+            margin-top: 25px;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            float: left;
+            display: none;
+        }
+
+        #worksheet-screen {
+            display: none;
+        }
+
+        .ws-header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .ws-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .ws-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+
+        .ws-question {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .ws-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .ws-answer {
+            background: #e8f5e9;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .print-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        @media print {
+            header, .nav-buttons, .print-btn, #login-screen, #game-screen { display: none !important; }
+            #worksheet-screen { display: block !important; }
+            body { background: white; }
+            .card { box-shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="school-logo">
+                <span class="school-title">مدارس الرياض</span>
+                <span class="school-sub">فرع الملقا</span>
+            </div>
+            <div class="slogan-badge">نبني القادة</div>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn-nav active" onclick="switchTab('game')">رحلة المغامرة</button>
+            <button class="btn-nav" onclick="switchTab('worksheet')">أوراق العمل المحلولة (A4)</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- تسجيل الدخول -->
+        <div id="login-screen" class="card">
+            <h2>رحلة قادة التفسير 🌟</h2>
+            <p style="color: var(--gray); font-weight: 600;">مادة التفسير - الصف الأول المتوسط (الفصل الدراسي الأول)</p>
+            
+            <div class="input-group">
+                <label>اسم الطالب القيادي:</label>
+                <input type="text" id="player-name" placeholder="أدخل اسمك الثلاثي لتبدأ المغامرة..." required>
+            </div>
+
+            <button class="btn-start" onclick="startGame()">ابدأ رحلة التميز 🚀</button>
+        </div>
+
+        <!-- لعبة المغامرة والتحدي -->
+        <div id="game-screen" class="card" style="display: none;">
+            <div class="player-bar">
+                <div class="player-info">
+                    <h3 id="display-name">القائد: ---</h3>
+                </div>
+                <div class="stats">
+                    <div class="stat-box">النقاط: <span id="score">0</span> 🏆</div>
+                    <div class="stat-box">السؤال: <span id="stage">1</span> / 60 🎯</div>
+                </div>
+            </div>
+
+            <div class="question-counter">
+                <span id="unit-title">الوحدة التعليمية والتفسير الموضوعي</span>
+                <span id="progress-text">السؤال 1 من 60</span>
+            </div>
+
+            <div class="question-text" id="question-text">جاري تحميل السؤال...</div>
+
+            <div class="options-grid" id="options-container"></div>
+
+            <div class="explanation" id="explanation"></div>
+
+            <button class="btn-next" id="next-btn" onclick="nextQuestion()">السؤال التالي ⬅️</button>
+        </div>
+
+        <!-- أوراق العمل المحلولة للطباعة -->
+        <div id="worksheet-screen" class="card">
+            <button class="print-btn" onclick="window.print()">🖨️ طباعة ورقة العمل كاملة (PDF / A4)</button>
+            
+            <div class="ws-header">
+                <h2>كراسة أوراق العمل الشاملة والمحلولة لمادة التفسير</h2>
+                <p style="font-weight: 700; color: var(--primary);">الصف الأول المتوسط - الفصل الدراسي الأول | مدارس الرياض (فرع الملقا)</p>
+                <p style="font-size: 0.9rem; color: var(--gray); margin-top: 5px;">شعارنا الداعم: "نبني القادة"</p>
+            </div>
+
+            <div class="ws-meta">
+                <div>اسم الطالب: .......................................</div>
+                <div>الفصل: أول متوسط / .........</div>
+                <div>التاريخ: ..... / ..... / 1448 هـ</div>
+            </div>
+
+            <div id="worksheet-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const questionsData = [
+            { q: "ما معنى كلمة (الْفَلَقِ) في قوله تعالى: {قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ}؟[cite: 20]", options: ["الصبح إذا انفلق", "الليل المظلم", "السحاب والغيوم", "النجوم المتألقة"], correct: 0, exp: "الفلق هو الصبح إذا انفلق واطلع نوره.[cite: 20]" },
+            { q: "لماذا وصف الوسواس بـ (الْخَنَّاسِ) في سورة الناس؟[cite: 20]", options: ["لأنه يظهر علانية", "لأنه يختفي ويستتر عند ذكر الله", "لأنه لا يؤثر في القلوب", "لأنه يأتي في النهار فقط"], correct: 1, exp: "يخنس الشيطان ويتراجع ويكف كلما ذكر العبد ربه.[cite: 20]" },
+            { q: "ما معنى قوله تعالى: {وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ}؟[cite: 20, 21]", options: ["الشر القادم في وقت الظهيرة", "الليل إذا أظلم ودخل", "الرياح القوية", "البحر عند هيجانه"], correct: 1, exp: "الغاسق هو الليل، ووقب أي دخل وأظلم.[cite: 21]" },
+            { q: "المقصود بـ (النَّفَّاثَاتِ فِي الْعُقَدِ) هنّ:[cite: 21]", options: ["النساء النساجات", "الساحرات اللاتي ينفثن في العقد", "الرياح الملقحة", "السحب الماطره"], correct: 1, exp: "الاستعاذة من شر السواحر اللاتي يستعملن العقد وينفثن فيها بالسحر.[cite: 21]" },
+            { q: "تضمنت سورة الناس الاستعاذة برب الناس ومليكهم وإلههم من شر:[cite: 21, 22]", options: ["حاسد إذا حسد", "الوسواس الخناس من الجنة والناس", "غاسق إذا وقب", "النفاثات في العقد"], correct: 1, exp: "سورة الناس مخصصة للحماية من الوسوسة الشيطانية والإنسية.[cite: 21, 22]" },
+            { q: "ما معنى اسم الله (الصَّمَدُ) كما ورد في التفسير؟[cite: 23]", options: ["السميع لكل الأصوات", "الخالق للعالمين فقط", "الذي تقصده الخلائق وتصمد إليه في حوائجها لكماله", "الرحيم بعباده المتقين"], correct: 2, exp: "الصمد هو السيد الذي كمل في سؤدده وتقصده المخلوقات في كافة حوائجها.[cite: 23]" },
+            { q: "تعدل سورة الإخلاص في الفضل ثلث:[cite: 23]", options: ["القرآن الكريم", "السنة النبوية", "العلم الشرعي", "الأذكار اليومية"], correct: 0, exp: "ثبت في الحديث الصحيح أن سورة الإخلاص تعدل ثلث القرآن لاشتمالها على توحيد الإلهية والأسماء والصفات.[cite: 23]" },
+            { q: "المراد بـ (تَبَّتْ يَدَا أَبِي لَهَبٍ) أي:[cite: 24]", options: ["خسرت وخابت أعماله", "قويت ونجحت", "انكسرت يداه مادياً", "زادت أمواله"], correct: 0, exp: "التباب هو الخسران والهلاك المحقق لأبي لهب.[cite: 24]" },
+            { q: "ما المقصود بـ (حَبْلٌ مِّن مَّسَدٍ) في سورة المسد؟[cite: 24]", options: ["حبل من اللؤلؤ", "حبل من ليف قوي شديد يلف في جيدها بالنار", "حبل من ذهب", "حبل من الحرير"], correct: 1, exp: "المسد هو الليف المفتول الشديد الذي تعذب به امرأة أبي لهب في نار جهنم.[cite: 24]" },
+            { q: "ما السبب في نزول سورة المسد؟[cite: 24, 25]", options: ["رد أبي لهب على النبي عندما جمع قريشاً قائلاً: (تباً لك سائر اليوم)", "سؤال المشركين عن نسب الله", "طلب المشركين من النبي عبادة آلهتهم", "انتصار المسلمين في بدر"], correct: 0, exp: "نزلت رداً على كلمة أبي لهب السيئة للرسول عند جبل الصفا.[cite: 24, 25]" },
+            { q: "ما الذي يُشرع للمسلم فعله عند تحقق النعم والانتصارات كما بينت سورة النصر؟[cite: 26]", options: ["التفاخر والتباهي بين الناس", "الراحة وترك الأعمال", "التسبيح بحمد الله والاستغفار", "الاحتفال دون ذكر الله"], correct: 2, exp: "قال تعالى: {فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ} شكراً لله على توفيقه ونعمه.[cite: 26]" },
+            { q: "تضمنت سورة الكافرون قاعدة العبادة العظيمة وهي:[cite: 26]", options: ["المساومة في الدين", "البراءة التامة من الشرك وأهله", "المشاركة في العبادات الباطلة", "التساهل في التوحيد"], correct: 1, exp: "تؤكد السورة على التبرؤ التام من الشرك وعبادة غير الله: {لَكُمْ دِينَكُمْ وَلِيَ دِينِ}.[cite: 26]" },
+            { q: "معنى قوله تعالى في سورة النصر: {وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا}:[cite: 26, 27]", options: ["فرادى وقليلين", "جماعات كثيرة متتابعة", "تجاراً ومسافرين", "خفية وسراً"], correct: 1, exp: "أفواجاً تعني جماعات وزمراً كبيرة بعد فتح مكة.[cite: 27]" },
+            { q: "سورة النصر كانت إشارة وإشعاراً بـ:[cite: 27]", options: ["بداية الدعوة", "قرب أجل النبي صلى الله عليه وسلم", "فرض الصيام", "الهجرة إلى المدينة"], correct: 1, exp: "استنبط الصحابة ومنهم ابن عباس أن السورة فيها نعي واقتراب أجل الرسول بعد كمال الرسالة.[cite: 27]" },
+            { q: "في سورة الكافرون، أمر النبي أن يعلن للمشركين:[cite: 27, 28]", options: ["لا أَعْبُدُ مَا تَعْبُدُونَ", "أعبد آلهتكم يوماً وتعبدون إلهي يوماً", "الموافقة على شروطهم", "ترك الدعوة"], correct: 0, exp: "صريحة في قطع الرجاء عن موافقتهم في عبادة الأوثان.[cite: 28]" },
+            { q: "ما المقصود بـ (الْكَوْثَرَ) الممنوح للنبي صلى الله عليه وسلم؟[cite: 29]", options: ["جبل كبير في مكة المكرمة", "نهر عظيم وخير كثير أعطي للرسول في الجنة", "حصن حصين في المدينة", "روضة من رياض الدنيا"], correct: 1, exp: "الكوثر هو نهر في الجنة خيره كثير أعطاه الله لنبيه الكريم.[cite: 29]" },
+            { q: "معنى (إِنَّ شَانِئَكَ هُوَ الأَبْتَرُ) في سورة الكوثر:[cite: 29, 30]", options: ["أن مبغضك يا محمد هو المقطوع من كل خير وذكر جميل", "أن محبك هو الخاسر", "أن المشرك ذو مال كثير", "أن ناصرك هو الأقل"], correct: 0, exp: "الشانئ هو المبغض، والأبتر هو المقطوع أثره وذكره من الخير.[cite: 30]" },
+            { q: "ما المراد بـ (الْمَاعُونَ) الذي يمنعه المكذبون بالدين؟[cite: 30]", options: ["الأموال العظيمة والكنوز", "الأشياء اليسيرة التي يُستعان بها كالقدر والدلو", "الأنعام والماشية", "المباني والمساكن"], correct: 1, exp: "الماعون اسم لما يُستعار ويعار عادة بين الجيران من الماعون والأدوات البسيطة.[cite: 30]" },
+            { q: "من صفات المكذبين بالدين في سورة الماعون:[cite: 30]", options: ["يدعون إلى إطعام المسكين", "يدعون اليتيم ويقسون عليه", "يصلون في أوقاتها بشغف", "يبذلون أموالهم للفقراء"], correct: 1, exp: "قال تعالى: {فَذَلِكَ الَّذِي يَدُعُّ الْيَتِيمَ} أي يدفعه بعنف وقسوة.[cite: 30]" },
+            { q: "المقصود بـ {الَّذِينَ هُمْ عَن صَلاتِهِمْ سَاهُونَ}:[cite: 30, 31]", options: ["الذين يغفلون عنها ويؤخرونها عن وقتها رياءً", "الذين يخشعون فيها", "الذين يبكرون للمسجد", "الذين يقرؤون السور الطويلة"], correct: 0, exp: "السهو عن الصلاة هو التهاون بإخراجها عن وقتها والتكاسل عنها.[cite: 31]" },
+            { q: "ما النعمتان العظيمتان اللتان ذكر الله بهما قريشاً في السورة؟[cite: 32]", options: ["النصر في الحروب وكثرة المال", "الإطعام من جوع والأمن من الخوف", "الشفاء من الأمراض وطول العمر", "كثرة الأولاد وخصوبة الأرض"], correct: 1, exp: "قال تعالى: {الَّذِي أَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ}.[cite: 32]" },
+            { q: "رحلة الشتاء والصيف عند قريش كانت إلى:[cite: 32]", options: ["الشام شتاءً واليمن صيفاً", "اليمن شتاءً والشام صيفاً", "مصر شتاء والعراق صيفاً", "مكة شتاء والمدينة صيفاً"], correct: 1, exp: "كانت رحلتهم في الشتاء إلى اليمن لدفئها، وفي الصيف إلى الشام لاعتدال جوها.[cite: 32]" },
+            { q: "أرسل الله على أصحاب الفيل (طَيْرًا أَبَابِيلَ) ومعناها:[cite: 32, 33]", options: ["طيوراً ضخمة جداً", "طيوراً متفرقة متتابعة جماعات", "طيوراً بيضاء أليفة", "طيوراً مائية"], correct: 1, exp: "أبابيل أي جماعات وفرقاً متتابعة تحمل حجارة من سجيل.[cite: 33]" },
+            { q: "معنى (فَجَعَلَهُمْ كَعَصْفٍ مَّأْكُولٍ):[cite: 33]", options: ["كالأشجار الثابتة", "كزرع مأكول قد دهسته الدواب وتبدد", "كالجبال الراسية", "كالحصون المنيعة"], correct: 1, exp: "العصف المأكول هو ورق الزرع والتبن الذي أكلته الدواب وتفتت.[cite: 33]" },
+            { q: "قائد أصحاب الفيل الذي أراد هدم الكعبة هو:[cite: 33, 34]", options: ["فرعون", "أبرهة الحبشي", "قارون", "النمرود"], correct: 1, exp: "أبرهة الأشرم ملك الحبشة هو الذي جهز جيش الفيل لهدم بيت الله الحرام.[cite: 34]" },
+            { q: "ما الفرق بين (الهُمَزَةِ) و (اللُّمَزَةِ)؟[cite: 35]", options: ["الهمزة بالعين والغمز واللمزة باللسان والقول", "الهمزة بالقول واللمزة بالفعل", "لا يوجد فرق بينهما", "الهمزة للمؤمنين واللمزة للجميع"], correct: 0, exp: "الهماز هو الذي يعيب الناس بغير لسانه (كالإشارة والعين)، واللماز باللسان والتصريح.[cite: 35]" },
+            { q: "ما الشروط الأربعة للنجاة من الخسران كما وردت في سورة العصر؟[cite: 35]", options: ["الصلاة، الصوم، الزكاة والحج", "الإيمان، العمل الصالح، التواصي بالحق، والتواصي بالصبر", "الصدق، الشجاعة، الكرم، والعلم", "الجهاد، النفقة، الذكر والدعاء"], correct: 1, exp: "استثنت السورة من آمن وعمل صالحاً وتواصى بالحق والصبر.[cite: 35]" },
+            { q: "معنى (الَّذِي جَمَعَ مَالاً وَعَدَّدَهُ) في سورة الهمزة:[cite: 35, 36]", options: ["أنفقه في سبيل الله", "أحصاه واعتنى بجمعه مع البخل ومنع الحقوق", "زكاه وواسى به الفقراء", "استثمره في التجارة الحلال"], correct: 1, exp: "الانشغال بجمع المال وتعداده مع الشح ومنع حقوق الله فيه.[cite: 36]" },
+            { q: "المقصود بـ (الْحُطَمَةُ) في سورة الهمزة هي:[cite: 36]", options: ["اسم من أسماء الجنة", "اسم من أسماء النار تحطم كل ما يلقى فيها", "طريق صخرية", "جبل في النار"], correct: 1, exp: "الحطمة هي نار جهنم سميت بذلك لأنها تهشم وتحطم العظام والأجسام.[cite: 36]" },
+            { q: "قسم الله تبارك وتعالى بـ (العَصْرِ) والمقصود به:[cite: 36, 37]", options: ["وقت الظهيرة فقط", "الزمان والدهر لما فيه من العبر", "عصر العنب", "ساعة من اليوم"], correct: 1, exp: "قسم بالزمان لما يقع فيه من حوادث وعبر وتغيرات.[cite: 37]" },
+            { q: "ما معنى قوله تعالى: {أَلْهَاكُمُ التَّكَاثُرُ}؟[cite: 38]", options: ["شغلكم التباهي بالمال والأولاد عن طاعة الله", "شجعكم التكاثر على العلم", "زادكم خشوعاً لله", "أعانكم على الطاعة"], correct: 0, exp: "التكاثر بالمال والجاه والرئاسات شغلكم عن الغاية التي خلقتم لها.[cite: 38]" },
+            { q: "المقصود بـ (حَتَّى زُرْتُمُ الْمَقَابِرَ) أي:[cite: 38, 39]", options: ["زيارة المقابر للدعاء فقط", "حتى متُّمْ ودفنتم في القبور", "السفر إلى المدن", "زيارة المرضى"], correct: 1, exp: "استمر ألهاكم التكاثر حتى انقضت أعماركم وصرتم إلى المقابر مدافن.[cite: 39]" },
+            { q: "سميت القيامة بـ (الْقَارِعَةُ) لأنها:[cite: 39, 40]", options: ["تقرع القلوب بأهوالها وشدائدها", "تقرع الأبواب بالاستئذان", "تأتي في الهدوء", "تكون لطيفة على المشركين"], correct: 0, exp: "تقرع الآذان والقلوب بعظيم أهوالها وصدمتها.[cite: 40]" },
+            { q: "يكون الناس يوم القارعة كـ (الْفَرَاشِ الْمَبْثُوثِ) والمقصود به:[cite: 40]", options: ["الطيور المنتظمة", "الجراد المتفرق المتموج المنتشر في كل اتجاه لخوفهم", "النحل المنتظم", "الأسماك البحرية"], correct: 1, exp: "الفراش المنتشر الذي يموج بعضه في بعض لشدة هوله وحيرته.[cite: 40]" },
+            { q: "من ثقلت موازينه بالحسنات يوم القيامة فهو في:[cite: 40, 41]", options: ["عيشة راضية في الجنة", "هاوية ونار حامية", "حزن وضيق", "انتظار طويل"], correct: 0, exp: "قال تعالى: {فَهُوَ فِي عِيشَةٍ رَّاضِيَةٍ} أي في الجنة المرضية.[cite: 40, 41]" },
+            { q: "ما هي (الْعَادِيَاتِ ضَبْحًا) في بداية سورة العاديات؟[cite: 42, 43]", options: ["الرياح العاصفة", "الخيل التي تعدو في سبيل الله ويُسمع صوت نفسها", "الجمال المسافرة", "السحب الماطرة"], correct: 1, exp: "العاديات هي الخيل التي تعدو والضبح صوت نفسها عند الركض.[cite: 43]" },
+            { q: "معنى (فَالْمُورِيَاتِ قَدْحًا):[cite: 43]", options: ["الخيل تخرج النار بقدح حوافرها الحجارة", "السحب التي تبرق", "السيوف اللامعة", "المنازل المضاءة"], correct: 0, exp: "إيقاد النار بضرب الحوافر بالحجارة لصلابتها وسرعتها.[cite: 43]" },
+            { q: "المقصود بـ (إِنَّ الإِنسَانَ لِرَبِّهِ لَكَنُودٌ):[cite: 43, 44]", options: ["لكفور لجحود لنعم ربه", "لصابر ومؤمن", "لمنفق لماله", "محب للخير دائماً"], correct: 0, exp: "الكنود هو الجحود يعدد المصائب وينسى النعم.[cite: 44]" },
+            { q: "في سورة الزلزلة: {وَأَخْرَجَتِ الأَرْضُ أَثْقَالَهَا} تعني أخرجت:[cite: 44]", options: ["المياه والعيون", "الموتى والكنوز المدفونة في بطنها", "الأشجار والنباتات", "الصخور والمعادن فقط"], correct: 1, exp: "تخرج الأرض ما في بطنها من الموتى والكنوز عند البعث.[cite: 44]" },
+            { q: "من يعمل مثقال ذرة خيراً يره ومن يعمل مثقال ذرة شراً يره دلت الآية على:[cite: 44]", options: ["دقة الميزان وعدم ضياع أي عمل صغر أو كبر", "مغفرة الذنوب دون حساب", "تساوي الحسنات والسيئات", "أن الأعمال البسيطة لا تحسب"], correct: 0, exp: "إثبات العدل التام والجزاء على أقل القليل من خير أو شر.[cite: 44]" },
+            { q: "كيف حمى الله تعالى موسى عليه السلام وهو رضيع من بطش فرعون؟[cite: 45]", options: ["إخفائه في مغارة بعيدة", "أوحى لأمه أن تضعه في التابوت وتلقيه في اليم (النهر)", "إرساله إلى بلاد الشام", "إخفائه عند حراس فرعون"], correct: 1, exp: "قال تعالى: {أَنْ اقْذِفِيهِ فِي التَّابُوتِ فَاقْذِفِيهِ فِي الْيَمِّ} فحفظه الله وحمله إلى بيت فرعون.[cite: 45]" },
+            { q: "ما الفضل العظيم الذي أكرم الله به أم موسى عليه السلام بعد إلقائه في اليم؟[cite: 45, 46]", options: ["أن جعلها معالجة فرعون", "أن رده الله إليها كي تقر عينها ولا تحزن وأصبح يرضع منها فقط", "أن منحها أموالاً كثيرة", "أن هاجرت فوراً مع قومها"], correct: 1, exp: "قال تعالى: {فَرَدَدْنَاهُ إِلَى أُمِّهِ كَيْ تَقَرَّ عَيْنُهَا وَلَا تَحْزَنَ}.[cite: 46]" },
+            { q: "ما السبب الأساسي في هلاك قارون وطغيانه كما جاء في سورة القصص؟[cite: 47]", options: ["نسبة المال والعلم لنفسه واستكباره قائلًا: {إِنَّمَا أُوتِيتُهُ عَلَى عِلْمٍ عِندِي}", "ضعف تجارته", "خروجه من مكة", "عدم قدرته على البناء"], correct: 0, exp: "قارون كفر بنعمة الله ونسب الفضل والمال لنفسه ونفسه المستكبرة.[cite: 47]" },
+            { q: "ما العقاب العاجل الذي حل بقارون وبداره؟[cite: 47]", options: ["الغرق في البحر", "الخسف به وبداره في الأرض", "الإحراق بالنار", "الريح الصرصر العاتية"], correct: 1, exp: "قال تعالى: {فَخَسَفْنَا بِهِ وَبِدَارِهِ الْأَرْضَ}.[cite: 47]" },
+            { q: "ما الدرس الإيماني المستفاد من موقف سليمان عليه السلام لما سمع كلام النملة؟[cite: 49]", options: ["التبسم والتواضع وشكر نعمة الله والدعاء بالتوفيق للعمل الصالح", "الغضب من النملة", "التجاهل والسير بسرعة", "تدمير وادي النمل"], correct: 0, exp: "قال تعالى: {فَتَبَسَّمَ ضَاحِكًا مِّن قَوْلِهَا وَقَالَ رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ}.[cite: 49]" },
+            { q: "ما الدرس القيادي التربوي المستفاد من تفقد سليمان عليه السلام للهدهد؟[cite: 49, 50]", options: ["الاعتماد الكلي على الطيور", "حزم القائد وتفقده لرعيته وعدم التغاضي عن الغياب بدون عذر شرعي", "ترك الجن والإنس بدون متابعة", "العقاب المباشر دون سماع العذر"], correct: 1, exp: "قال تعالى: {وَتَفَقَّدَ الطَّيْرَ فَقَالَ مَا لِيَ لا أَرَى الْهُدْهُدَ أَمْ كَانَ مِنَ الْغَائِبِينَ} مما يدل على المتابعة الدقيقة.[cite: 49, 50]" },
+            { q: "معنى (سِجِّيلٍ) في قوله تعالى {تَرْمِيهِم بِحِجَارَةٍ مِّن سِجِّيلٍ}:[cite: 51, 52]", options: ["طين متحجر صلب", "حديد محمي", "خشب يابس", "رمال ناعمة"], correct: 0, exp: "السجيل هو طين متحجر صلب عُذب به أصحاب الفيل.[cite: 52]" },
+            { q: "معنى (فِي جِيدِهَا) في سورة المسد:[cite: 51, 52]", options: ["في رأسها", "في عنقها ورقبتها", "في يدها", "في صدرها"], correct: 1, exp: "الجيد في اللغة هو العنق والرقبة.[cite: 52]" },
+            { q: "معنى (لَيُنبَذَنَّ فِي الْحُطَمَةِ):[cite: 51, 52]", options: ["ليكرمن في الجنة", "ليطرحن ويقذفن في النار بشدة", "ليتركن في الدنيا", "ليؤخذن إلى القصر"], correct: 1, exp: "النبذ هو الطرح والإلقاء بشدة في نار جهنم.[cite: 52]" },
+            { q: "أهمية اللجوء إلى الله والاعتصام به وحده في كل الشدائد تتجلى في سورتي:[cite: 54, 55]", options: ["الفلق والناس (المعوذتين)", "قريش والفيل", "العصر والهمزة", "الكوثر والتكاثر"], correct: 0, exp: "المعوذتان أفردا بالاستعاذة برب الفلق ورب الناس والاعتصام به من كل شر.[cite: 54, 55]" }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+        let playerName = "";
+
+        function startGame() {
+            const input = document.getElementById('player-name').value;
+            if(!input.trim()) {
+                alert("لطفاً أدخل اسمك الثلاثي لتبدأ المغامرة!");
+                return;
+            }
+            playerName = input;
+            document.getElementById('display-name').innerText = "القائد: " + playerName;
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'block';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questionsData[currentQ];
+            document.getElementById('stage').innerText = currentQ + 1;
+            document.getElementById('progress-text').innerText = `السؤال ${currentQ + 1} من ${questionsData.length}`;
+            document.getElementById('question-text').innerText = q.q;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            document.getElementById('explanation').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span>${['أ', 'ب', 'ج', 'د'][idx]})</span> <span>${opt}</span>`;
+                btn.onclick = () => checkAnswer(idx, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIdx, btn) {
+            const q = questionsData[currentQ];
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach(b => b.onclick = null);
+
+            if(selectedIdx === q.correct) {
+                btn.classList.add('correct');
+                score += 10;
+                document.getElementById('score').innerText = score;
+            } else {
+                btn.classList.add('wrong');
+                buttons[q.correct].classList.add('correct');
+            }
+
+            const expDiv = document.getElementById('explanation');
+            expDiv.innerHTML = `💡 <strong>الإجابة النموذجية والسبب:</strong> ${q.exp}`;
+            expDiv.style.display = 'block';
+
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questionsData.length) {
+                loadQuestion();
+            } else {
+                alert(`🎉 كفو أيها القائد الرائع ${playerName}!\nأتممت رحلة التفسير بنجاح وحصلت على ${score} نقطة!`);
+                switchTab('worksheet');
+            }
+        }
+
+        function switchTab(tab) {
+            if(tab === 'game') {
+                document.getElementById('worksheet-screen').style.display = 'none';
+                if(playerName) {
+                    document.getElementById('game-screen').style.display = 'block';
+                } else {
+                    document.getElementById('login-screen').style.display = 'block';
+                }
+            } else {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('game-screen').style.display = 'none';
+                document.getElementById('worksheet-screen').style.display = 'block';
+                renderWorksheet();
+            }
+        }
+
+        function renderWorksheet() {
+            const wsContainer = document.getElementById('worksheet-content');
+            wsContainer.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const item = document.createElement('div');
+                item.className = 'ws-item';
+                
+                let optsHtml = '';
+                q.options.forEach((opt, oIdx) => {
+                    optsHtml += `<div>${['أ', 'ب', 'ج', 'د'][oIdx]}) ${opt}</div>`;
+                });
+
+                item.innerHTML = `
+                    <div class="ws-question">[س ${idx + 1}] ${q.q}</div>
+                    <div class="ws-options">${optsHtml}</div>
+                    <div class="ws-answer">✅ الإجابة النموذجية: ${q.exp}</div>
+                `;
+                wsContainer.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>
